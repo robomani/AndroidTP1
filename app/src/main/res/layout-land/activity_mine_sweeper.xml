@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <android.widget.GridLayout
+            android:id="@+id/grid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -37,7 +38,7 @@
 
             <Button
                 android:id="@+id/button98"
-                android:layout_width="18dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:text="Button" />
 
@@ -620,24 +621,24 @@
 
         <Space
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
 
         <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="end">
+            android:layout_gravity="end"
+            android:orientation="vertical">
 
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_NewGame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nouvelle partie" />
@@ -645,10 +646,10 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/lbl_Mines"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mines restantes: 10" />
@@ -656,7 +657,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
         </LinearLayout>
 
 

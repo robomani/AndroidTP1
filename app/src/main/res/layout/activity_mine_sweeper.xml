@@ -6,6 +6,7 @@
     tools:context=".MineSweeper">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
@@ -14,11 +15,10 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_NewGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,7 +27,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <android.widget.GridLayout
             android:id="@+id/grid"
@@ -44,8 +44,7 @@
             <Button
                 android:id="@+id/button100"
                 android:layout_width="20dp"
-                android:layout_height="20dp"
-                 />
+                android:layout_height="20dp" />
 
             <Button
                 android:id="@+id/button99"
@@ -634,15 +633,13 @@
         </android.widget.GridLayout>
 
 
-
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/lbl_Mines"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -651,8 +648,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
 
 
     </LinearLayout>
