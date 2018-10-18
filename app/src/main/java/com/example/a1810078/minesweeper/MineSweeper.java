@@ -26,48 +26,58 @@ public class MineSweeper extends Activity {
 
     public void Refresh()
     {
+
         GridLayout grid = findViewById(R.id.grid);
-        int i;
-        int j;
-        for (i = 0 ; i < ROW_COUNT;i++);
+
+        for (int i = 0 ; i < ROW_COUNT;i++)
         {
-            for(j = 0; j < COL_COUNT; j++);
+            for(int j = 0; j < COL_COUNT; j++)
             {
                 final int x = j;
                 final int y = i;
-                int index = x+y * COL_COUNT;
+                int index = x + y * COL_COUNT;
                 Button button = (Button) grid.getChildAt(index);
-                if (data[x + y * 10] == EXPOSED)
+                if (data[index] == EXPOSED)
                 {
-                    switch (mine[x + y * 10])
+                    switch (mine[index])
                     {
                         case 0:
-                            //button.setBackground(btn_empty);
+                            button.setBackgroundResource(R.drawable.empty);
+                            break;
                         case 1:
-                            //button.setBackground(btn_1);
+                            button.setBackgroundResource(R.drawable.m1);
+                            break;
                         case 2:
-                            //button.setBackground(btn_2);
+                            button.setBackgroundResource(R.drawable.m2);
+                            break;
                         case 3:
-                            //button.setBackground(btn_3);
+                            button.setBackgroundResource(R.drawable.m3);
+                            break;
                         case 4:
-                            //button.setBackground(btn_4);
+                            button.setBackgroundResource(R.drawable.m4);
+                            break;
                         case 5:
-                            //button.setBackground(btn_5);
+                            button.setBackgroundResource(R.drawable.m5);
+                            break;
                         case 6:
-                            //button.setBackground(btn_6);
+                            button.setBackgroundResource(R.drawable.m6);
+                            break;
                         case 7:
-                            //button.setBackground(btn_7);
+                            button.setBackgroundResource(R.drawable.m7);
+                            break;
                         case 8:
-                           // button.setBackground(btn_8);
+                            button.setBackgroundResource(R.drawable.m8);
+                            break;
                     }
                 }
-                else if(data[x + y * 10] == FLAG)
+                else if(data[index] == FLAG)
                 {
-                    //button.setBackground(btn_flag);
+                    button.setBackgroundResource(R.drawable.flag);
                 }
 
             }
         }
+
     }
 
     public void SpawnMines()
@@ -76,7 +86,7 @@ public class MineSweeper extends Activity {
         {
             int x = ThreadLocalRandom.current().nextInt(0, 10);
             int y = ThreadLocalRandom.current().nextInt(0, 10);
-            if (mine[(x-1)+(y-1)*10] == MINE)
+            if (mine[x + y *10] == MINE)
             {
                 i--;
             }
@@ -84,35 +94,35 @@ public class MineSweeper extends Activity {
             {
                 mine[(x-1)+(y-1)*10] = MINE;
 
-                if (mine[(x-1)+(y-1)*10] != MINE)
+                if (x > 0 && y > 0 && mine[(x-1)+(y-1)*10] != MINE)
                 {
                     mine[(x-1)+(y-1)*10]++;
                 }
-                if (mine[(x)+(y-1)*10] != MINE)
+                if (y > 0 && mine[(x)+(y-1)*10] != MINE)
                 {
                     mine[(x)+(y-1)*10]++;
                 }
-                if (mine[(x+1)+(y-1)*10] != MINE)
+                if (x < 8 && y > 0 && mine[(x+1)+(y-1)*10] != MINE)
                 {
                     mine[(x+1)+(y-1)*10]++;
                 }
-                if (mine[(x-1)+(y)*10] != MINE)
+                if (x > 0 && mine[(x-1)+(y)*10] != MINE)
                 {
                     mine[(x-1)+(y)*10]++;
                 }
-                if (mine[(x-1)+(y+1)*10] != MINE)
+                if (x > 0 && y < 8 && mine[(x-1)+(y+1)*10] != MINE)
                 {
                     mine[(x-1)+(y+1)*10]++;
                 }
-                if (mine[(x+1)+(y)*10] != MINE)
+                if (x <8 &&  mine[(x+1)+(y)*10] != MINE)
                 {
                     mine[(x+1)+(y)*10]++;
                 }
-                if (mine[(x)+(y+1)*10] != MINE)
+                if (x > 0 && y < 8 && mine[(x)+(y+1)*10] != MINE)
                 {
                     mine[(x)+(y+1)*10]++;
                 }
-                if (mine[(x+1)+(y+1)*10] != MINE)
+                if (x < 8 && y < 8 && mine[(x+1)+(y+1)*10] != MINE)
                 {
                     mine[(x+1)+(y+1)*10]++;
                 }
@@ -135,19 +145,97 @@ public class MineSweeper extends Activity {
         }
         else
         {
-            if (mine[(x-1)+(y-1)*10] != MINE && mine[(x)+(y-1)*10] != MINE &&
-                    mine[(x+1)+(y-1)*10] != MINE && mine[(x-1)+(y)*10] != MINE &&
-                            mine[(x-1)+(y+1)*10] != MINE && mine[(x+1)+(y)*10] != MINE &&
-                                    mine[(x)+(y+1)*10] != MINE && mine[(x+1)+(y+1)*10] != MINE)
+            boolean revealMore = true;
+            if (x > 0 && y > 0)
             {
-                Reveal(x-1,y-1);
-                Reveal(x,y-1);
-                Reveal(x+1,y-1);
-                Reveal(x-1,y);
-                Reveal(x+1,y);
-                Reveal(x-1,y+1);
-                Reveal(x,y+1);
-                Reveal(x+1,y+1);
+                if (mine[(x-1)+(y-1)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (x > 0)
+            {
+                if (mine[(x-1)+(y)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (x > 0 && y < 8)
+            {
+                if (mine[(x-1)+(y+1)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (y > 0)
+            {
+                if (mine[(x)+(y-1)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (y > 0 && x < 8)
+            {
+                if (mine[(x+1)+(y-1)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (y < 8)
+            {
+                if (mine[(x)+(y+1)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (x < 8)
+            {
+                if (mine[(x+1)+(y)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (x < 8 && y < 8)
+            {
+                if ( mine[(x+1)+(y+1)*10] == MINE)
+                {
+                    revealMore = false;
+                }
+            }
+            if (revealMore)
+            {
+                if (x > 0 && y > 0)
+                {
+                    Reveal(x-1,y-1);
+                }
+                if (x > 0)
+                {
+                    Reveal(x-1,y);
+                }
+                if (x > 0 && y < 8)
+                {
+                    Reveal(x-1,y+1);
+                }
+                if (y > 0)
+                {
+                    Reveal(x,y-1);
+                }
+                if (y > 0 && x < 8)
+                {
+                    Reveal(x+1,y-1);
+                }
+                if (y < 8)
+                {
+                    Reveal(x,y+1);
+                }
+                if (x < 8)
+                {
+                    Reveal(x+1,y);
+                }
+                if (x < 8 && y < 8)
+                {
+                    Reveal(x+1,y+1);
+                }
             }
         }
 
@@ -166,7 +254,7 @@ public class MineSweeper extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine_sweeper);
 
-        if (savedInstanceState.isEmpty())
+        if (savedInstanceState != null)
         {
             SpawnMines();
         }
@@ -177,16 +265,16 @@ public class MineSweeper extends Activity {
         }
 
         GridLayout grid = findViewById(R.id.grid);
-        int i;
-        int j;
-        for (i = 0 ; i < ROW_COUNT;i++);
+
+        for (int i = 0 ; i < ROW_COUNT;i++)
         {
-            for(j = 0; j < COL_COUNT; j++);
+            for(int j = 0; j < COL_COUNT; j++)
             {
                 final int x = j;
                 final int y = i;
                 int index = x+y * COL_COUNT;
-                Button button = (Button) grid.getChildAt(index);
+                Button button = (Button)grid.getChildAt(index);
+                button.setBackgroundResource(R.drawable.btn_idle);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
